@@ -57,6 +57,12 @@ import { ref } from 'vue'
 
 const menuLinks = [
   {
+    title: 'Dashboard',
+    caption: 'Gastos por periodo',
+    icon: 'dashboard',
+    to: '/dashboard'
+  },
+  {
     title: 'Funcionarios',
     caption: 'Cadastro e custos',
     icon: 'groups',
