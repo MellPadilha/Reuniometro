@@ -1,1 +1,23 @@
-// app global css
+body {
+  background: #f7f8fa;
+}
+
+.page-wrap {
+  margin: 0 auto;
+  max-width: 1180px;
+  padding: 24px;
+}
+
+.dialog-card {
+  width: min(560px, calc(100vw - 32px));
+}
+
+.q-table tbody tr {
+  cursor: default;
+}
+
+@media (max-width: 600px) {
+  .page-wrap {
+    padding: 16px;
+  }
+}
