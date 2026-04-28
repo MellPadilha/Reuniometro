@@ -1,6 +1,6 @@
 <template>
   <q-page class="page-wrap">
-    <div class="row items-center justify-between q-mb-md">
+    <div class="row items-center justify-between page-heading">
       <div>
         <h1 class="text-h5 q-my-none">Funcionarios</h1>
         <div class="text-caption text-grey-7">Cadastro e custos por hora</div>
@@ -9,64 +9,68 @@
       <q-btn color="primary" icon="add" label="Novo" @click="abrirModal()" />
     </div>
 
-    <q-input
-      v-model="filtro"
-      outlined
-      dense
-      debounce="250"
-      class="q-mb-md"
-      placeholder="Filtrar por nome ou departamento"
-      @update:model-value="carregarFuncionarios"
-    >
-      <template #prepend>
-        <q-icon name="search" />
-      </template>
-    </q-input>
+    <q-card flat class="surface-card">
+      <q-card-section>
+        <q-input
+          v-model="filtro"
+          outlined
+          dense
+          debounce="250"
+          placeholder="Filtrar por nome ou departamento"
+          @update:model-value="carregarFuncionarios"
+        >
+          <template #prepend>
+            <q-icon name="search" />
+          </template>
+        </q-input>
+      </q-card-section>
 
-    <q-table
-      flat
-      bordered
-      row-key="id"
-      :rows="funcionarios"
-      :columns="columns"
-      :loading="carregando"
-      no-data-label="Nenhum funcionario cadastrado"
-    >
-      <template #body-cell-salarioMensal="props">
-        <q-td :props="props">{{ formatCurrency(props.row.salarioMensal) }}</q-td>
-      </template>
+      <div class="accent-divider" />
 
-      <template #body-cell-custoHora="props">
-        <q-td :props="props">{{ formatCurrency(props.row.custoHora) }}</q-td>
-      </template>
+      <q-table
+        flat
+        row-key="id"
+        :rows="funcionarios"
+        :columns="columns"
+        :loading="carregando"
+        no-data-label="Nenhum funcionario cadastrado"
+      >
+        <template #body-cell-salarioMensal="props">
+          <q-td :props="props">{{ formatCurrency(props.row.salarioMensal) }}</q-td>
+        </template>
 
-      <template #body-cell-ativo="props">
-        <q-td :props="props">
-          <q-badge :color="props.row.ativo ? 'positive' : 'grey-6'">
-            {{ props.row.ativo ? 'Ativo' : 'Inativo' }}
-          </q-badge>
-        </q-td>
-      </template>
+        <template #body-cell-custoHora="props">
+          <q-td :props="props">{{ formatCurrency(props.row.custoHora) }}</q-td>
+        </template>
 
-      <template #body-cell-acoes="props">
-        <q-td :props="props" class="q-gutter-xs">
-          <q-btn flat round dense icon="edit" color="primary" @click="abrirModal(props.row)">
-            <q-tooltip>Editar</q-tooltip>
-          </q-btn>
-          <q-btn
-            flat
-            round
-            dense
-            icon="person_off"
-            color="negative"
-            :disable="!props.row.ativo"
-            @click="inativar(props.row)"
-          >
-            <q-tooltip>Inativar</q-tooltip>
-          </q-btn>
-        </q-td>
-      </template>
-    </q-table>
+        <template #body-cell-ativo="props">
+          <q-td :props="props">
+            <q-badge :color="props.row.ativo ? 'positive' : 'grey-6'">
+              {{ props.row.ativo ? 'Ativo' : 'Inativo' }}
+            </q-badge>
+          </q-td>
+        </template>
+
+        <template #body-cell-acoes="props">
+          <q-td :props="props" class="q-gutter-xs">
+            <q-btn flat round dense icon="edit" color="primary" @click="abrirModal(props.row)">
+              <q-tooltip>Editar</q-tooltip>
+            </q-btn>
+            <q-btn
+              flat
+              round
+              dense
+              icon="person_off"
+              color="negative"
+              :disable="!props.row.ativo"
+              @click="inativar(props.row)"
+            >
+              <q-tooltip>Inativar</q-tooltip>
+            </q-btn>
+          </q-td>
+        </template>
+      </q-table>
+    </q-card>
 
     <q-dialog v-model="modalAberto" persistent>
       <q-card class="dialog-card">

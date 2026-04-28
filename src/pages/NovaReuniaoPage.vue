@@ -1,6 +1,6 @@
 <template>
   <q-page class="page-wrap">
-    <div class="row items-center justify-between q-mb-md">
+    <div class="row items-center justify-between page-heading">
       <div>
         <h1 class="text-h5 q-my-none">Nova reuniao</h1>
         <div class="text-caption text-grey-7">Participantes e custo previsto</div>
@@ -11,45 +11,47 @@
 
     <div class="row q-col-gutter-lg">
       <div class="col-12 col-md-5">
-        <q-form class="q-gutter-md" @submit="salvar">
-          <q-input v-model="form.titulo" outlined label="Titulo" :rules="[required]" />
-          <q-input v-model="form.data" outlined type="datetime-local" label="Data" :rules="[required]" />
-          <q-input
-            v-model.number="form.duracaoMinutos"
-            outlined
-            type="number"
-            step="1"
-            label="Duracao em minutos"
-            :rules="[positive]"
-          />
-          <q-input v-model="form.descricao" outlined type="textarea" label="Descricao" autogrow />
-          <q-select
-            v-model="participantesSelecionados"
-            outlined
-            multiple
-            use-chips
-            option-label="nome"
-            :options="funcionarios"
-            label="Participantes"
-            :rules="[hasParticipants]"
-          >
-            <template #option="scope">
-              <q-item v-bind="scope.itemProps">
-                <q-item-section>
-                  <q-item-label>{{ scope.opt.nome }}</q-item-label>
-                  <q-item-label caption>{{ scope.opt.departamento || 'Sem departamento' }}</q-item-label>
-                </q-item-section>
-                <q-item-section side>{{ formatCurrency(scope.opt.custoHora) }}/h</q-item-section>
-              </q-item>
-            </template>
-          </q-select>
+        <q-card flat class="soft-card form-card">
+          <q-form class="q-gutter-md" @submit="salvar">
+            <q-input v-model="form.titulo" outlined label="Titulo" :rules="[required]" />
+            <q-input v-model="form.data" outlined type="datetime-local" label="Data" :rules="[required]" />
+            <q-input
+              v-model.number="form.duracaoMinutos"
+              outlined
+              type="number"
+              step="1"
+              label="Duracao em minutos"
+              :rules="[positive]"
+            />
+            <q-input v-model="form.descricao" outlined type="textarea" label="Descricao" autogrow />
+            <q-select
+              v-model="participantesSelecionados"
+              outlined
+              multiple
+              use-chips
+              option-label="nome"
+              :options="funcionarios"
+              label="Participantes"
+              :rules="[hasParticipants]"
+            >
+              <template #option="scope">
+                <q-item v-bind="scope.itemProps">
+                  <q-item-section>
+                    <q-item-label>{{ scope.opt.nome }}</q-item-label>
+                    <q-item-label caption>{{ scope.opt.departamento || 'Sem departamento' }}</q-item-label>
+                  </q-item-section>
+                  <q-item-section side>{{ formatCurrency(scope.opt.custoHora) }}/h</q-item-section>
+                </q-item>
+              </template>
+            </q-select>
 
-          <q-btn color="primary" icon="save" label="Salvar reuniao" type="submit" :loading="salvando" />
-        </q-form>
+            <q-btn color="primary" icon="save" label="Salvar reuniao" type="submit" :loading="salvando" />
+          </q-form>
+        </q-card>
       </div>
 
       <div class="col-12 col-md-7">
-        <q-card flat bordered>
+        <q-card flat class="surface-card">
           <q-card-section class="row items-center justify-between">
             <div>
               <div class="text-subtitle1">Preview</div>

@@ -1,6 +1,6 @@
 <template>
   <q-page class="page-wrap">
-    <div class="row items-center justify-between q-mb-md">
+    <div class="row items-center justify-between page-heading">
       <div>
         <h1 class="text-h5 q-my-none">Reunioes</h1>
         <div class="text-caption text-grey-7">Historico e exportacao</div>
@@ -12,36 +12,37 @@
       </div>
     </div>
 
-    <q-table
-      flat
-      bordered
-      row-key="id"
-      :rows="reunioes"
-      :columns="columns"
-      :loading="carregando"
-      no-data-label="Nenhuma reuniao cadastrada"
-      @row-click="abrirDetalhe"
-    >
-      <template #body-cell-data="props">
-        <q-td :props="props">{{ formatDate(props.row.data) }}</q-td>
-      </template>
+    <q-card flat class="surface-card">
+      <q-table
+        flat
+        row-key="id"
+        :rows="reunioes"
+        :columns="columns"
+        :loading="carregando"
+        no-data-label="Nenhuma reuniao cadastrada"
+        @row-click="abrirDetalhe"
+      >
+        <template #body-cell-data="props">
+          <q-td :props="props">{{ formatDate(props.row.data) }}</q-td>
+        </template>
 
-      <template #body-cell-duracao="props">
-        <q-td :props="props">{{ props.row.duracaoMinutos }} min</q-td>
-      </template>
+        <template #body-cell-duracao="props">
+          <q-td :props="props">{{ props.row.duracaoMinutos }} min</q-td>
+        </template>
 
-      <template #body-cell-custoTotal="props">
-        <q-td :props="props">{{ formatCurrency(props.row.custoTotal) }}</q-td>
-      </template>
+        <template #body-cell-custoTotal="props">
+          <q-td :props="props">{{ formatCurrency(props.row.custoTotal) }}</q-td>
+        </template>
 
-      <template #body-cell-acoes="props">
-        <q-td :props="props">
-          <q-btn flat round dense icon="chevron_right" color="primary" :to="`/reunioes/${props.row.id}`">
-            <q-tooltip>Detalhe</q-tooltip>
-          </q-btn>
-        </q-td>
-      </template>
-    </q-table>
+        <template #body-cell-acoes="props">
+          <q-td :props="props">
+            <q-btn flat round dense icon="chevron_right" color="primary" :to="`/reunioes/${props.row.id}`">
+              <q-tooltip>Detalhe</q-tooltip>
+            </q-btn>
+          </q-td>
+        </template>
+      </q-table>
+    </q-card>
   </q-page>
 </template>
 

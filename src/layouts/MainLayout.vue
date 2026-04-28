@@ -1,6 +1,6 @@
 <template>
   <q-layout view="lHh Lpr lFf">
-    <q-header bordered class="bg-white text-dark">
+    <q-header class="app-header text-dark">
       <q-toolbar>
         <q-btn
           flat
@@ -22,7 +22,7 @@
     <q-drawer
       v-model="leftDrawerOpen"
       show-if-above
-      bordered
+      class="app-drawer"
     >
       <q-list>
         <q-item-label header>Menu</q-item-label>
