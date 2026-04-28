@@ -15,12 +15,6 @@ Aplicação desktop em Quasar + Electron para cadastro de funcionários, registr
 - `src/services/exportService.js`
 - `src/services/db.js`
 
-## Fluxo de build
-
-```bash
-quasar build -m electron
-```
-
 ## Exportação Excel
 
 A exportação gera 3 abas:
